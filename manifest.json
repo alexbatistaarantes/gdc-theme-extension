@@ -1,0 +1,32 @@
+{
+
+    "manifest_version": 2,
+    "name": "GDC Theme",
+    "version": "1.0",
+  
+    "description": "Allow the user to choose colors to the GDC interface.",
+    "homepage_url": "https://github.com/############",
+
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+  
+    "permissions": [
+      "activeTab"
+    ],
+
+    "browser_action": {
+      "default_icon": "icons/icon-48.png",
+      "default_title": "GDC Theme",
+      "default_popup": "popup/index.html"
+    },
+    
+    "content_scripts": [
+      {
+        "matches": ["https://glyphdrawing.club/"],
+        "js": ["content_scripts/gdc-theme.js"]
+      }
+    ]
+  
+  }
+  
