@@ -120,8 +120,6 @@
     /* Apply the colors to each component */
     function applyTheme(theme){
 
-        console.log("oiee");
-
         editVectorBorder(themes[theme].vectorBorderColor);
         editVectorBackgroundColor(themes[theme].vectorbackgroundColor);
         
