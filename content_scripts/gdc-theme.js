@@ -71,24 +71,69 @@
         'default': default_theme
     }
 
+    let preference = undefined;
+
+    /* Vector: current selected Glyph (bottom left), glyphs on Glyph Sets and on Selected Layers tabs  */
+    /* Canvas: the space below the space where you draw */
+    /* Controls Container: the controls panel on the right side */
+    /* Header Division: the header of each section in the Controls Container */
+
+    /* ## Vector ## */
+    function editVectorBorder(color){
+        document.querySelectorAll(".vector").forEach((vector) => {
+            vector.querySelector("svg").style.border = `1px solid ${color}`;
+        })
+    }
+    function editVectorBackgroundColor(color){
+        document.querySelectorAll(".vector").forEach((vector) => {
+            vector.querySelector("svg").style.backgroundColor = color;
+        })
+    }
+
+    /* ## Canvas ## */
+    function editCanvasBackgroundColor(color){
+        document.querySelector('.canvas_container').style.backgroundColor = color;
+    }
+
+    /* ## Controls Container ## */
+    function editControlsContainerBackgroundColor(color){
+        document.querySelector(".controls_container").style.backgroundColor = color;
+    }
+    function editControlsContainerFontColor(color){
+        document.querySelector(".controls_container").style.color = color;
+    }
+
+    /* ## Header division ## */
+    function editHeaderDivisionBackgroundColor(color){
+        const headerDivision = document.querySelector(".controls_container");
+        headerDivision.querySelectorAll("h3").forEach((header) => {
+            header.style.backgroundColor = color;
+        });
+    }
+    function editHeaderDivisionFontColor(color){
+        const headerDivision = document.querySelector(".controls_container");
+        headerDivision.querySelectorAll("h3").forEach((header) => {
+            header.style.color = color;
+        });
+    }
+
     /* Apply the colors to each component */
     function applyTheme(theme){
 
-        /* Glyph selecionado (no canto esquerdo em baixo) */
-        document.getElementsByClassName('vector')[0].style.border = themes[theme].vectorBorderSize+"px solid "+ themes[theme].vectorBorderColor ;
-        document.getElementsByClassName('canvas_container')[0].style.backgroundColor = themes[theme].backgroundColor;
+        console.log("oiee");
+
+        editVectorBorder(themes[theme].vectorBorderColor);
+        editVectorBackgroundColor(themes[theme].vectorbackgroundColor);
         
-        /* O painel de controle */
-        var controlsContainer = document.getElementsByClassName("controls_container")[0];
-        controlsContainer.style.backgroundColor = themes[theme].backgroundColor;
-        controlsContainer.style.color = themes[theme].fontColor;
+        editCanvasBackgroundColor(themes[theme].backgroundColor);
         
-        /* Divisórias no painel de controle */
-        var headerDivision = controlsContainer.getElementsByTagName("h3");
-        for( var i = 0; i < headerDivision.length; i++ ){
-            headerDivision[i].style.backgroundColor = themes[theme].headerDivisionBgColor;    
-            headerDivision[i].style.color = themes[theme].headerDivisionFontColor;    
-        };
+        editControlsContainerBackgroundColor(themes[theme].backgroundColor);
+        editControlsContainerFontColor(themes[theme].fontColor);
+
+        editHeaderDivisionBackgroundColor(themes[theme].headerDivisionBgColor);
+        editHeaderDivisionFontColor(themes[theme].headerDivisionFontColor);
+        
+		const controlsContainer = document.querySelector(".controls_container");
         
         /* Glyphs mostrados no painel de controle (Ex: map keys, glyphs de cada layer da celula selecionada) */
         var vectors = controlsContainer.getElementsByClassName("vector");
@@ -134,7 +179,7 @@
         console.log(message);
         if (message.command === "apply-theme") {
             applyTheme(message.theme);
+            preference = themes[theme];
         }
     });
-
 })();
